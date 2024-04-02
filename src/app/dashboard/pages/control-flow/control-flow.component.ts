@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'dashboard-control-flow',
@@ -9,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export default class ControlFlowComponent {
 
+  public controlSignal = signal(true);
+
+  toggleButton(){
+    this.controlSignal.update( value => !value )
+  }
 }

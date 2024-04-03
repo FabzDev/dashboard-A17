@@ -1,2 +1,19 @@
-<p>defer-options works!</p>
+<shared-title rootTitle="Defer Triggers" />
 
+<section class="grid grid-cols-1">
+
+<h1 class="text-2xl">Interacciones</h1>
+<hr class="my-2">
+
+@defer(on interaction){
+  <shared-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+    <span>NgContent</span>
+  </shared-heavy-loaders-fast>
+
+} @placeholder {
+  <div class="bg-purple-100 h-20">
+    Click on div
+  </div>
+
+}
+</section>

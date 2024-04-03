@@ -1,19 +1,101 @@
 <shared-title rootTitle="Defer Triggers" />
 
-<section class="grid grid-cols-1">
-
+<!-- On Interaction -->
+<section>
 <h1 class="text-2xl">Interacciones</h1>
 <hr class="my-2">
 
 @defer(on interaction){
-  <shared-heavy-loaders-fast cssClass="bg-blue-500 h-20">
-    <span>NgContent</span>
+  <shared-heavy-loaders-fast cssClass="bg-red-500 h-20">
+    <span>On interaction - component</span>
   </shared-heavy-loaders-fast>
 
 } @placeholder {
-  <div class="bg-purple-100 h-20">
-    Click on div
+  <div class="bg-gray-100 h-20">
+    On interaction - placeholder
   </div>
-
 }
+</section>
+
+
+<!-- On Interaction with Button -->
+<section>
+  <hr class="my-2">
+  <!-- Button -->
+  <button #deferBtn class="px-5 py-2 bg-blue-500 hover:bg-blue-700 transition-all rounded text-white my-2">Defer</button>
+
+  @defer(on interaction(deferBtn)){
+    <shared-heavy-loaders-fast cssClass="bg-blue-500 h-20">
+      <span>On interaction with button - component</span>
+    </shared-heavy-loaders-fast>
+
+  } @placeholder {
+    <div class="bg-gray-100 h-20">
+      On interaction with button- placeholder
+    </div>
+  }
+</section>
+
+<!-- On Hover with Button -->
+<section>
+  <hr class="my-2">
+
+  @defer(on hover(deferBtn)){
+    <shared-heavy-loaders-fast cssClass="bg-pink-500 h-20">
+      <span>On hover with button - component</span>
+    </shared-heavy-loaders-fast>
+
+  } @placeholder {
+    <div class="bg-gray-100 h-20">
+      On hover with button- placeholder
+    </div>
+  }
+</section>
+
+<!-- On Inmidiate with Button -->
+<section>
+  <hr class="my-2">
+
+  @defer(on immediate){
+    <shared-heavy-loaders-fast cssClass="bg-purple-500 h-20">
+      <span>On immediate - component</span>
+    </shared-heavy-loaders-fast>
+
+  } @placeholder {
+    <div class="bg-gray-100 h-20">
+      On immediate - placeholder
+    </div>
+  }
+</section>
+
+<!-- On time -->
+<section>
+  <hr class="my-2">
+
+  @defer(on timer(5000)){
+    <shared-heavy-loaders-fast cssClass="bg-green-500 h-20">
+      <span>On timer (5 seg) - component</span>
+    </shared-heavy-loaders-fast>
+
+  } @placeholder {
+    <div class="bg-gray-100 h-20">
+      On timer (5 seg)- placeholder
+    </div>
+  }
+</section>
+
+<!-- On combination -->
+<section>
+  <hr class="my-2">
+
+  @defer(on hover; on idle){
+    <shared-heavy-loaders-fast cssClass="bg-cyan-500 h-20">
+      <span>On idle or hover - component</span>
+    </shared-heavy-loaders-fast>
+
+  } @placeholder {
+    <div class="bg-gray-100 h-20">
+      On idle or hover - placeholder
+    </div>
+  }
 </section>

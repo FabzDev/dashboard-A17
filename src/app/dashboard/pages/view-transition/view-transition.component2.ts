@@ -8,24 +8,18 @@ import { TitleComponent } from '@shared/title/title.component';
   template: `
     <shared-title rootTitle="View Transition 2" />
 
-<section class="flex justify-start">
+    <section class="flex justify-end">
+      <img
+        srcset="https://picsum.photos/id/237/200/300"
+        alt="Picsum"
+        width="200"
+        height="300"
+        style="view-transition-name: hero1"
+      />
 
-  <img
-    srcset="https://picsum.photos/id/237/200/300"
-    alt="Picsum"
-    width="200"
-    height="300"
-  >
-
-  <div
-     style="width: 14rem; height: 14rem;"
-     class="bg-blue-500"
-  ></div>
-
-
-</section>
-  `
+      <div class="fixed bottom-10 right-20 bg-purple-500 w-40 h-40 rounded"
+      style="view-transition-name: hero2"></div>
+    </section>
+  `,
 })
-export default class ViewTransitionComponent2 {
-
-}
+export default class ViewTransitionComponent2 {}

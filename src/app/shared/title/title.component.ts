@@ -4,7 +4,7 @@ import { booleanAttribute, Component, Input, signal } from '@angular/core';
   selector: 'shared-title',
   standalone: true,
   imports: [],
-  template: `<h1 class="text-2xl font-medium mb-5 ">{{rootTitle}}</h1>`
+  template: `<h1 class="text-3xl font-medium mb-5 ">{{rootTitle}}</h1>`
 })
 export class TitleComponent {
   @Input({ required: true }) public rootTitle = 'Título';

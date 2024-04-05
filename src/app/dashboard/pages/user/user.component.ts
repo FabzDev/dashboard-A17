@@ -5,7 +5,7 @@ import { User } from '@interfaces/users-response.interface';
 import { UserService } from '@services/user.service';
 import { TitleComponent } from '@shared/title/title.component';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'dashboard-user-page',
@@ -13,14 +13,18 @@ import { map } from 'rxjs';
   imports: [TitleComponent],
   template: `
     <section>
-      @if(signalCurrentUser()){
+      @if(signalUser()){
       <shared-title [rootTitle]="'User: ' + userName()"></shared-title>
-      <img [srcset]="signalCurrentUser()?.avatar" [alt]="signalCurrentUser()?.first_name" />
+      <img
+        [srcset]="signalUser()?.avatar"
+        [alt]="signalUser()?.first_name"
+      />
 
       <span
-        >{{ signalCurrentUser()!.first_name }} {{ signalCurrentUser()!.last_name }}</span
+        >{{ signalUser()!.first_name }}
+        {{ signalUser()!.last_name }}</span
       >
-      <p>{{ signalCurrentUser()!.email }}</p>
+      <p>{{ signalUser()!.email }}</p>
       } @else {
       <h2>Cargando información del usuario...</h2>
       }
@@ -33,33 +37,25 @@ export default class UserComponent {
   private userService = inject(UserService);
 
   //PROPERTIES
-  public currentUser = signal<User | undefined>(undefined);
+  public user = signal<User | undefined>(undefined);
   public userName = computed(
     () =>
-      `${this.signalCurrentUser()?.first_name} ${this.signalCurrentUser()?.last_name}` ?? ''
+      `${this.signalUser()?.first_name} ${
+        this.signalUser()?.last_name
+      }` ?? ''
   );
-  public signalCurrentUser;
 
   //METHODS
-  // constructor() {
-
-  //   const id$ = this.routeParams.params.pipe(map( ({id}) => id ))
-
-  constructor() {
-    let userId = '';
-
-    this.routeParams.params.subscribe(({ id }) => userId = id)
-
-    this.signalCurrentUser = toSignal(
-      this.userService.getUserById( userId  )
+  public signalUser = toSignal(
+    this.routeParams.params.pipe(
+      switchMap(({ id }) => this.userService.getUserById(id))
     )
-
-  }
-  // constructor() {
-  //   this.routeParams.params.subscribe(({ id }) =>
-  //     this.userService
-  //       .getUserById(id)
-  //       .subscribe((user) => this.currentUser.set(user))
-  //   );
-  // }
+  );
 }
+// constructor() {
+//   this.routeParams.params.subscribe(({ id }) =>
+//     this.userService
+//       .getUserById(id)
+//       .subscribe((user) => this.currentUser.set(user))
+//   );
+// }
